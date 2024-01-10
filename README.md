@@ -10,23 +10,17 @@ Just type `python3 ptm_ratio.py -h` or `python3 ptm_ratio.py --help` to see the 
 
 **Mandatory**
 
-+----------------------+--------------------------------------------------------------------------------------------------+
-| \--evidence-file; -e | The path to the MaxQuant evidence.txt file                                                       |
-+----------------------+--------------------------------------------------------------------------------------------------+
-| \--ptm; -p           | The amino acid + PTM pattern, indicated in the way it's wrote in the 'Modified sequence' column. |
-|                      |                                                                                                  |
-|                      | e.g. "Q(Deamidation (NQ))" or "(Glu-\>pyro-Glu)E"                                                |
-+----------------------+--------------------------------------------------------------------------------------------------+
+-   **-evidence-file; -e.** The path to the MaxQuant evidence.txt file.
+
+-   **\--ptm; -p.** The amino acid + PTM pattern, indicated in the way it's wrote in the 'Modified sequence' column. e.g. "Q(Deamidation (NQ))" or "(Glu-\>pyro-Glu)E".
 
 **Optional**
 
-+---------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ---output-path; -o                                | The path to locate the folder with the results (default: evidence.txt containing folder)            |
-+---------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ---per-protein, ---no-per-protein                 | Indicate if the ratio is also computed per protein (default: True)                                  |
-+---------------------------------------------------+-----------------------------------------------------------------------------------------------------+
-| ---remove-contaminants, ---no-remove-contaminants | Indicate if the contaminant and reverse proteins are removed to calculate the ratio (default: True) |
-+---------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+-   **\--output-path; -o.** The path to locate the folder with the results (default: evidence.txt containing folder).
+
+-   **\--per-protein, ---no-per-protein.** Indicate if the ratio is also computed per protein (default: True).
+
+-   **\--remove-contaminants, ---no-remove-contaminants.** Indicate if the contaminant and reverse proteins are removed to calculate the ratio (default: True)
 
 The following code line exemplifies the way to execute the script to calculate the Q deamidation ratio:
 
