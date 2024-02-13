@@ -1,7 +1,0 @@
-Raw_file,Leading_razor_protein,Amino_acid,PTM,Amino_acid_count,Conversion_count,Total_PSM_count,PTM_norm_ratio
-M4,UPI0005406912_COL1A1,N,Deamidation (NQ),1,0,1,0.0
-M4,UPI0021170F6F_COL1A2,N,Deamidation (NQ),8,3,10,0.3
-M5,UPI0001C5C769_COL1A2,N,Deamidation (NQ),34,27,42,0.7738095238095238
-M5,UPI0001C5CC19_COL2A1,N,Deamidation (NQ),2,0,1,0.0
-M5,UPI0005406719_AMELX,N,Deamidation (NQ),1,1,1,1.0
-M5,UPI0021160426_COL1A1,N,Deamidation (NQ),5,2,5,0.4
