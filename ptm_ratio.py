@@ -37,7 +37,7 @@ def main():
   
   # Upload the evidence table, check for format errors and filter the data frame 
   evidence_df = pd.read_csv(evidence_path, sep=None, engine="python")
-  format_errors(evidence_df, abundance_column, modification_mark)
+  format_errors(evidence_df, abundance_column, modification_mark, evidence_path)
   evidence_df = filtering(evidence_df, amino_acid, abundance_column, do_remove_contaminants)
 
   # Create a folder to store the results
@@ -141,7 +141,7 @@ def ptm_mark_split_aa_and_modification(ptm_pattern):
 
     return amino_acid, modification_mark
 
-def format_errors(evidence_df, abundance_column, modification_mark):
+def format_errors(evidence_df, abundance_column, modification_mark, evidence_path):
   """
   This function stops the code and prints an error if some conditions are fulfill
   *INPUT
@@ -162,10 +162,19 @@ def format_errors(evidence_df, abundance_column, modification_mark):
   # The way the PTM was inputed is not valid 
   try:
     if modification_mark.count("(") != modification_mark.count(")"):
-      raise ValueError("The {} format is not valid. Check PTM format; e.g. 'M(Oxidation (M)) or '(Glu->pyro-Glu)E'".format(modification_mark))
+      raise ValueError("The '{}' format is not valid. e.g. 'M(Oxidation (M)) or '(Glu->pyro-Glu)E'".format(modification_mark))
   except ValueError as ve:
     print("ERROR:", ve)
     sys.exit(1)
+
+  # The evidence.txt file was not indicated as a path
+  try:
+    if not evidence_path.startswith((".", "/")):
+      raise ValueError("The '{}' path format is not valid. e.g. './evidence.txt' or /Users/user1/Documents/evidence.txt".format(evidence_path))
+  except ValueError as ve:
+    print("ERROR:", ve)
+    sys.exit(1)
+  
   
 def filtering(evidence_df, amino_acid, abundance_column, do_remove_contaminants):
   """
