@@ -95,7 +95,7 @@ def parser():
 
   # Recovering the arguments 
   args = parser.parse_args()
-  evidence_path = args.evidence_file[0]
+  evidence_path = os.path.realpath(args.evidence_file[0])
   ptm_pattern = args.ptm[0]
   amino_acid, modification_mark = ptm_mark_split_aa_and_modification(ptm_pattern)
 
@@ -104,7 +104,7 @@ def parser():
   
   # If the ouput path is not indicated, the results would be output in the same folder that contains the evidence.txt file
   if args.path:
-    output_folder_path = args.path[0] + "/" + output_folder_name
+    output_folder_path = os.path.realpath(args.path[0]) + "/" + output_folder_name
   else:
     output_folder_path = os.path.dirname(evidence_path) + "/" + output_folder_name
 
@@ -166,15 +166,6 @@ def format_errors(evidence_df, abundance_column, modification_mark, evidence_pat
   except ValueError as ve:
     print("ERROR:", ve)
     sys.exit(1)
-
-  # The evidence.txt file was not indicated as a path
-  try:
-    if not evidence_path.startswith((".", "/")):
-      raise ValueError("The '{}' path format is not valid. e.g. './evidence.txt' or /Users/user1/Documents/evidence.txt".format(evidence_path))
-  except ValueError as ve:
-    print("ERROR:", ve)
-    sys.exit(1)
-  
   
 def filtering(evidence_df, amino_acid, abundance_column, do_remove_contaminants):
   """
@@ -274,7 +265,7 @@ def ptm_rate_calculator(evidence_df, amino_acid, modification_mark, ptm_pattern,
 
   groupby_column = ["Raw_file"]
   if do_per_protein:
-    groupby_column.append("Leading_razor_protein")
+    groupby_column = ["Raw_file", "Leading_razor_protein"]
 
   conversion_rate_df["Amino_acid_count"] = evidence_df.groupby(groupby_column)["Amino acid count"].apply(lambda x: x.sum())
   conversion_rate_df["Conversion_count"] = evidence_df.groupby(groupby_column)["Conversion count"].apply(lambda x: x.sum())
@@ -325,13 +316,17 @@ def ptm_bootstrap_calculator(conversion_ratio_evidence_df, amino_acid, modificat
   """
   groupby_column = ["Raw_file"]
   if do_per_protein:
-    groupby_column.append("Leading_razor_protein")
+    groupby_column = ["Raw_file", "Leading_razor_protein"]
 
   col_names = groupby_column + ["Replicate", "Amino_acid", "PTM", "Conversion_ratio"]
   bootstrap_replicates_df = pd.DataFrame(columns=col_names)
 
   # Bootstraping
+
+  bootstrap_replicates_df_list = []
+
   for tag, group_df in conversion_ratio_evidence_df.groupby(groupby_column):
+    
     for replicate in range(1000):
       # Resample the data with replacement
       random_sample_evidence_df = group_df.sample(n=len(group_df), replace=True)  
@@ -343,12 +338,16 @@ def ptm_bootstrap_calculator(conversion_ratio_evidence_df, amino_acid, modificat
 
       # Writte the result of each iteration in a dataframe
       if not do_per_protein:
-        new_row = [tag] + [replicate, amino_acid, modification_mark[1:-1], ptm_conversion_ratio]
+        new_row = [tag[0], replicate, amino_acid, modification_mark[1:-1], ptm_conversion_ratio]
       elif do_per_protein:
         new_row = list(tag) + [replicate, amino_acid, modification_mark[1:-1], ptm_conversion_ratio]
       
       new_row_serie = pd.Series(new_row, index=bootstrap_replicates_df.columns)
-      bootstrap_replicates_df = pd.concat([bootstrap_replicates_df, pd.DataFrame([new_row_serie], columns=bootstrap_replicates_df.columns)])
+      new_row_df = pd.DataFrame([new_row_serie], columns=bootstrap_replicates_df.columns)
+
+      bootstrap_replicates_df_list.append(new_row_df)
+
+  bootstrap_replicates_df = pd.concat(bootstrap_replicates_df_list)
 
   # Create and write the a df including some bootstrap statistics 
   bootstrap_statistics_df = pd.DataFrame()
