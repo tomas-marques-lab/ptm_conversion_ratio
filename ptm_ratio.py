@@ -36,9 +36,9 @@ def main():
       print("  PYRO SPECIAL CASE: Only the N-terminal amino acids are employed to calculate the {} ratio".format(ptm_pattern))  
   
   # Upload the evidence table, check for format errors and filter the data frame 
-  evidence_df = pd.read_csv(evidence_path, sep=None, engine="python")
+  evidence_df = pd.read_csv(evidence_path, sep=None, engine="python", encoding="utf-8-sig")
   format_errors(evidence_df, abundance_column, modification_mark, evidence_path)
-  evidence_df = filtering(evidence_df, amino_acid, abundance_column, do_remove_contaminants)
+  evidence_df = filtering_evidence_df(evidence_df, amino_acid, abundance_column, do_remove_contaminants)
 
   # Create a folder to store the results
   if not os.path.exists(output_folder_path):
@@ -151,7 +151,7 @@ def format_errors(evidence_df, abundance_column, modification_mark, evidence_pat
   - modification_mark; A string indicating the PTM modification mark e.g. "(Deamidation (NQ))" 
     or "(Glu->pyro-Glu)"
   """
-  # The abundance column does not exist in the evidence.txt fil
+  # The abundance column does not exist in evidence.txt
   try:
     if abundance_column not in evidence_df.columns:
       raise ValueError("The '{}' column does not exist in this evidence.txt file".format(abundance_column))
@@ -167,7 +167,7 @@ def format_errors(evidence_df, abundance_column, modification_mark, evidence_pat
     print("ERROR:", ve)
     sys.exit(1)
   
-def filtering(evidence_df, amino_acid, abundance_column, do_remove_contaminants):
+def filtering_evidence_df(evidence_df, amino_acid, abundance_column, do_remove_contaminants):
   """
   This function filters the dataset by removing Reverse and Contaminant peptides (if required) and
   eliminating the rows without an abundance value (like rows without Intensity due to MS/MS errors).
