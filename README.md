@@ -2,7 +2,7 @@
 
 The **ptm_ratio.py** script takes an evidence.txt MaxQuant file and calculates a PTM conversion ratio between the modified / unmodified amino acid version. The normalisation of the process is performed by relative abundance values, such as PSM or Intensity, and the ratio can be computed per raw file and protein. Each conversion ratio is by default supported using 1000 bootstrap replicates.
 
-**Disclaimer1**: The script has been tested only using an evidence.txt file from *MaxQuant v2.0.2*
+**Disclaimer**: The script has been tested only using an evidence.txt file from *MaxQuant v2.0.2*
 
 ## Requirements
 
