@@ -4,8 +4,6 @@ The **ptm_ratio.py** script takes an evidence.txt MaxQuant file and calculates a
 
 **Disclaimer1**: The script has been tested only using an evidence.txt file from *MaxQuant v2.0.2*
 
-**Disclaimer2**: ptm_ratio.sh, ptm.txt and the /script folder are custom-made flavours (coded by Guille) to sistematically run the script under many PTMs. The ussage of those is not described in this README.md but in the notes within ptm_ratio.sh.
-
 ## Requirements
 
 -   Python v3.11.7 (it may also work in other versions)
