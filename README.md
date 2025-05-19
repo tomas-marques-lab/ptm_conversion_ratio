@@ -41,7 +41,7 @@ The main output of this script is the **Conversion ratio csv** (bulk_conversion_
 
 -   **Amino_acid_count**: Number of amino acids employed to calculate the conversion ratio.
 -   **Conversion_count**: Number of modified amino acids observed in the dataset.
--   **Abundance_count**: Number of "Peptide Spectrum Matches" employed to calculate the conversion ratio. NOTE; the number of unmodified amino acids can can be higher than the number of PSMs because a PSM (peptide) can contain the desired amino acid more than once.
+-   **Abundance_count**: Counts of "Peptide Spectrum Matches" or "Intensity" employed to calculate the conversion ratio. NOTE; In the case of "Peptide Spectrum Matches" (PSMs), the number of unmodified amino acids can exceed the number of PSMs, since a single match may contain the desired amino acid more than once.
 -   **Conversion_ratio**: Conversion ratio normalized by the abundance values.
 -   **Bootstrap_mean_conversion_ratio**: The conversion ratio mean obtained from the bootstrap replicates.
 -   **Q95_low**: The value that delimits the bottom of the 95% bootstrap replicates distribution.
