@@ -1,0 +1,9 @@
+M(Oxidation (M))
+P(Oxidation (P))
+(Gln->pyro-Glu)Q
+(Glu->pyro-Glu)E
+N(Deamidation (NQ))
+Q(Deamidation (NQ))
+R(Arg->Orn)
+S(Phospho (ST))
+T(Phospho (ST))

@@ -2,7 +2,9 @@
 
 The **ptm_ratio.py** script takes an evidence.txt MaxQuant file and calculates a PTM conversion ratio between the modified / unmodified amino acid version. The normalisation of the process is performed by relative abundance values, such as PSM or Intensity, and the ratio can be computed per raw file and protein. Each conversion ratio is by default supported using 1000 bootstrap replicates.
 
-**Disclaimer**: The script has been tested only using an evidence.txt file from *MaxQuant v2.0.2*
+**Disclaimer1**: The script has been tested only using an evidence.txt file from *MaxQuant v2.0.2*
+
+**Disclaimer2**: ptm_ratio.sh, ptm.txt and the /script folder are custom-made flavours (coded by Guille) to sistematically run the script under many PTMs. The ussage of those is not described in this README.md but in the notes within ptm_ratio.sh.
 
 ## Requirements
 
@@ -56,9 +58,3 @@ If the bootstrap replicates option is on, which by default it is, the **Bootstra
 To calculate the conversion ratio, the total number of unmodified and modified amino acids are count for each peptide. Then, this values are divided (modified / total) and multiplied by the "peptide spectrum matches" (PSM) or the "Intensity" abundance values of the peptide. Afterwards, the data is splitted by raw file (and protein) and the normalized ratio of the peptides is summed up and divided by the total abundance value within each group. A more detailed explanation (including an example) can be seen in [David Lyon's deamidation script](https://github.com/dblyon/deamidation)
 
 If the PTM pattern is "(Glu-\>pyro-Glu)E" or "(Gln-\>pyro-Glu)Q", the calculations are only based on the first amino acid of each peptide. This decision is made because the pyro-Glu conversion only occurs at the N-terminal amino acid.
-
-## Testing and examples
-
-An example driven by two 10Ma *Deinotherium* samples can be found in the [**Example folder**](example)
-
-The script has been coded using an evidence.txt file from MaxQuant v2.0.2 and tested with the following PTMs: [M(Oxidation (M)), P(Oxidation (P)), (Gln-\>pyro-Glu)Q, (Glu-\>pyro-Glu)E, N(Deamidation (NQ)), Q(Deamidation (NQ)), R(Arg-\>Orn), T(Phospho (ST)), S(Phospho (ST))]

@@ -1,3 +1,0 @@
-Raw_file,Amino_acid,PTM,Amino_acid_count,Conversion_count,Total_abundance_count,Conversion_ratio,Boostrap_mean_converion_ratio,Q95_low,Q95_up
-M4,E,Glu->pyro-Glu,7,7,10,1.0,1.0,1.0,1.0
-M5,E,Glu->pyro-Glu,4,4,4,1.0,1.0,1.0,1.0

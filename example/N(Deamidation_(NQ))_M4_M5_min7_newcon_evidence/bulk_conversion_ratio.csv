@@ -1,3 +1,0 @@
-Raw_file,Amino_acid,PTM,Amino_acid_count,Conversion_count,Total_abundance_count,Conversion_ratio,Boostrap_mean_converion_ratio,Q95_low,Q95_up
-M4,N,Deamidation (NQ),9,3,11,0.2727272727272727,0.27437093600843715,0.0,0.5
-M5,N,Deamidation (NQ),42,30,49,0.7244897959183674,0.7241844403396498,0.5581395348837209,0.8365531789638933

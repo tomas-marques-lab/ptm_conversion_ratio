@@ -88,10 +88,10 @@ def parser():
   parser.add_argument("--evidence-file", "-e", dest="evidence_file", type=str, help="The path to the MaxQuant evidence.txt", required=True, nargs=1)
   parser.add_argument("--ptm", "-p", dest="ptm", type=str, help="The amino acid + PTM pattern, indicated in the way it's wrote in the 'Modified sequence' column e.g. Q(Deamidation (NQ)) or (Glu->pyro-Glu)E", required=True, nargs=1)
   parser.add_argument("--output-path", "-o", dest="path", type=str, help="The path to locate the folder with the result (default: evidence.txt containing folder)", required=False, nargs=1)
-  parser.add_argument("--abundance-column", "-a", dest="abundance_column", type=str, help=" (default: 'MS/MS count')", default=["MS/MS count"], required=False, nargs=1)
+  parser.add_argument("--abundance-column", "-a", dest="abundance_column", type=str, help="The column name for the abundance value e.g. 'MS/MS count' or 'Intensity' (default: 'MS/MS count')", default=["MS/MS count"], required=False, nargs=1)
   parser.add_argument("--per-protein", dest="per_protein", action=argparse.BooleanOptionalAction, help="Indicate if the ratio is also computed per protein", default=True, required=False)
-  parser.add_argument("--remove-contaminants", dest="remove_contaminants", action=argparse.BooleanOptionalAction, help="Indicate if the contaminant and reverse proteins are removed to calculate the ratio", default=True, required=False)
-  parser.add_argument("--bootstrap", dest="bootstrap", action=argparse.BooleanOptionalAction, help="Indicate if a 1000 bootstrap replicate is perform within each calculation", default=True, required=False)
+  parser.add_argument("--remove-contaminants", dest="remove_contaminants", action=argparse.BooleanOptionalAction, help="Indicate if the contaminant and reverse proteins are removed to calculate the ratio (default: True)", default=True, required=False)
+  parser.add_argument("--bootstrap", dest="bootstrap", action=argparse.BooleanOptionalAction, help="Indicate if a 1000 bootstrap replicate is perform within each calculation (default: True)", default=True, required=False)
 
   # Recovering the arguments 
   args = parser.parse_args()
