@@ -51,7 +51,7 @@ If the bootstrap replicates option is on, which by default it is, the **Bootstra
 
 ![](images/per_protein_bootstrap.png)
 
-## How does it works?
+## How does it work?
 
 To calculate the conversion ratio, the total number of unmodified and modified amino acids are count for each peptide. Then, this values are divided (modified / total) and multiplied by the "peptide spectrum matches" (PSM) or the "Intensity" abundance values of the peptide. Afterwards, the data is splitted by raw file (and protein) and the normalized ratio of the peptides is summed up and divided by the total abundance value within each group. A more detailed explanation (including an example) can be seen in [David Lyon's deamidation script](https://github.com/dblyon/deamidation)
 
